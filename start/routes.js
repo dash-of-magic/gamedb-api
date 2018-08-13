@@ -18,3 +18,12 @@ const Route = use('Route')
 Route.get('/', ({ request }) => {
   return { greeting: 'Hello world in JSON' }
 })
+
+Route.post('/register', 'UserController.register')
+Route.post('/login', 'UserController.login')
+
+Route.group(() => {
+  Route.get('/me', 'UserController.me')
+  Route.put('/update_profile', 'UserController.updateProfile')
+}).prefix('account').middleware(['auth:jwt'])
+
